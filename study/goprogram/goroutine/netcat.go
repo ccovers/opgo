@@ -8,7 +8,11 @@ import (
 )
 
 func main() {
-	conn, err := net.Dial("tcp", "localhost:8080")
+	address := "localhost:8080"
+	if len(os.Args) >= 2 {
+		address = os.Args[1]
+	}
+	conn, err := net.Dial("tcp", address)
 	if err != nil {
 		log.Fatal(err)
 	}

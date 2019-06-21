@@ -40,7 +40,7 @@ func handleConn(conn net.Conn) {
 		fmt.Printf("err: %s\n", err.Error())
 		return
 	}
-	fmt.Printf("[%d]: %s\n\n", n, string(buf[:n]))
+
 	var method, host, address string
 	fmt.Sscanf(string(buf[:bytes.IndexByte(buf[:], '\n')]), "%s%s", &method, &host)
 
@@ -59,12 +59,14 @@ func handleConn(conn net.Conn) {
 			address = hostPortUrl.Host
 		}
 	}
-	fmt.Println(method, host, address)
+
+	fmt.Printf("[%d]: %s\n\n", n, string(buf[:n]))
+	fmt.Println("method:", method, "host:", host, "address:", address)
 
 	//获得了请求的host和port，就开始拨号吧
-	server, err := net.Dial("tcp", address)
+	server, err := net.Dial("tcp", "www.baidu.com")
 	if err != nil {
-		log.Println(err)
+		log.Println("Dial:", err)
 		return
 	}
 	if method == "CONNECT" {
