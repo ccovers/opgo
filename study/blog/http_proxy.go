@@ -60,11 +60,11 @@ func handleConn(conn net.Conn) {
 		}
 	}
 
-	fmt.Printf("[%d]: %s\n\n", n, string(buf[:n]))
+	fmt.Printf("[%d]: %s\n", n, string(buf[:n]))
 	fmt.Println("method:", method, "host:", host, "address:", address)
 
 	//获得了请求的host和port，就开始拨号吧
-	server, err := net.Dial("tcp", "www.baidu.com")
+	server, err := net.Dial("tcp", "www.baidu.com:80")
 	if err != nil {
 		log.Println("Dial:", err)
 		return
