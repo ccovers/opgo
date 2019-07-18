@@ -23,7 +23,7 @@ func main() {
 
 	go func() {
 		fmt.Println("===+")
-		io.Copy(os.Stdout, conn)
+		io.CopyN(os.Stdout, conn, 100)
 		fmt.Println(done)
 		close(done)
 		fmt.Println("===++")
@@ -36,7 +36,7 @@ func main() {
 }
 
 func mustCopy(dst io.Writer, src io.Reader) {
-	if _, err := io.Copy(dst, src); err != nil {
+	if _, err := io.CopyN(dst, src, 100); err != nil {
 		fmt.Println(err)
 	}
 }
