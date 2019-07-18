@@ -22,12 +22,16 @@ func main() {
 	}
 
 	go func() {
+		fmt.Println("===+")
 		io.Copy(os.Stdout, conn)
 		fmt.Println(done)
 		close(done)
+		fmt.Println("===++")
 	}()
+	fmt.Println("===")
 	mustCopy(conn, os.Stdin)
 	conn.Close()
+	fmt.Println("===-")
 	<-done
 }
 
