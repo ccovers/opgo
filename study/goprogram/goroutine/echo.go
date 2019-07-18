@@ -1,10 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"io"
 	"log"
 	"net"
+	"strings"
 	"time"
 )
 
@@ -27,11 +28,16 @@ func main() {
 
 func handleConn(c net.Conn) {
 	defer c.Close()
-	for {
-		_, err := io.WriteString(c, time.Now().Format("2006-01-02 15:04:05\n"))
-		if err != nil {
-			return
-		}
-		time.Sleep(1 * time.Second)
+	input := bufio.NewScanner(c)
+	for input.Scan() {
+		go echo(c, input.Text(), 1*time.Second)
 	}
+}
+
+func echo(c net.Conn, shout string, delay time.Duration) {
+	fmt.Fprintln(c, "\t", strings.ToUpper(shout))
+	time.Sleep(delay)
+	fmt.Fprintln(c, "\t", shout)
+	time.Sleep(delay)
+	fmt.Fprintln(c, "\t", strings.ToLower(shout))
 }

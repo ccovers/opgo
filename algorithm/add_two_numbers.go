@@ -16,13 +16,6 @@ type ListNode struct {
 */
 
 func main() {
-	a := make([]int, 0)
-	a = append(a, 1)
-	a = append(a, 2)
-	a = append(a, 3)
-	fmt.Printf("%+v", len(a[1:]))
-	return
-
 	l1 := &ListNode{
 		Val:  7,
 		Next: nil,
