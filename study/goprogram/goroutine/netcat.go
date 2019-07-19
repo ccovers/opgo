@@ -35,10 +35,11 @@ func mustCopy(dst io.Writer, src io.Reader) {
 			fmt.Println("read:", err)
 			break
 		}
-		if string(buf) == "exit" {
+		if string(buf) == "exit\n" {
 			fmt.Println("eixt!")
 			break
 		}
+		fmt.Println(buf)
 		_, err = dst.Write(buf)
 		if err != nil {
 			fmt.Println("write:", err)
