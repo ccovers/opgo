@@ -6,6 +6,7 @@ import (
 	"log"
 	"net"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -35,11 +36,10 @@ func mustCopy(dst io.Writer, src io.Reader) {
 			fmt.Println("read:", err)
 			break
 		}
-		if string(buf) == "exit\n" {
+		if strings.Contains(string(buf), "exit") {
 			fmt.Println("eixt!")
 			break
 		}
-		fmt.Println(string(buf))
 		_, err = dst.Write(buf)
 		if err != nil {
 			fmt.Println("write:", err)
