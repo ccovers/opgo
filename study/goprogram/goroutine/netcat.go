@@ -29,8 +29,8 @@ func mustCopy(dst io.Writer, src io.Reader) {
 		log.Fatal(err)
 	}*/
 	for {
-		buf := make([]bye, 1024)
-		_, err := src.Read(p)
+		buf := make([]byte, 1024)
+		_, err := src.Read(buf)
 		if err != nil {
 			fmt.Println("read:", err)
 			break
