@@ -6,6 +6,7 @@
 - [Atoi](atoi.go)
 - [Itoa](itoa.go)
 - [二分查找](binary_search.go)
+- [归并排序](binary_search.go)
 
 
 ## SQL
