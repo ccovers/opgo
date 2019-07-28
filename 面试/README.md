@@ -19,9 +19,21 @@
 
 ## Linux、Git
 - 列出当前目录下所有的.go文件，如果包含子目录呢
-- 查找所有.go文件中包含的chan字符串
-- 将当前目录下的.sql文件都加上.backup后缀
-- Git常用命令及工作流程
+ls *.go
+find ./ -name *.go
 
+- 查找所有.go文件中包含的chan字符串
+grep chan ./ -r
+
+- 将当前目录下的.sql文件都加上.backup后缀
+x
+
+- Git常用命令及工作流程
+git add .
+git commit -m '注释'
+git push
+git pull
+git merge
+git reset --hard '版本号'
 
 
