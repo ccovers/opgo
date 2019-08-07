@@ -35,10 +35,102 @@ import (
 	"fmt"
 )
 
-func main() {
+const (
+	N = 3
+)
 
+type Point struct {
+	X int
+	Y int
+}
+
+func main() {
+	grid := [N][]int{{0, 1, -1}, {1, 0, -1}, {1, 1, 1}}
+	cnt := cherryPickup(grid[0:])
+	fmt.Printf("max: %d\n", cnt)
 }
 
 func cherryPickup(grid [][]int) int {
+	p := Point{X: 0, Y: 0}
+	return getToPath(grid, &p, 0, []Point{p})
+}
 
+func getToPath(grid [][]int, o *Point, cnt int, points []Point) int {
+	cgrid := [N][]int{{}, {}, {}}
+	for i, line := range grid {
+		for _, row := range line {
+			cgrid[i] = append(cgrid[i], row)
+		}
+	}
+
+	v := cgrid[o.X][o.Y]
+	if v == -1 {
+		return 0
+	} else if v == 1 {
+		cnt += 1
+		cgrid[o.X][o.Y] = 0
+	}
+
+	if o.X == N-1 && o.Y == N-1 {
+		cnt = getHomePath(cgrid[0:], &Point{X: o.X, Y: o.Y}, cnt, points)
+	} else {
+		var cntR int
+		var cntD int
+		if o.X < N-1 {
+			p := Point{X: o.X + 1, Y: o.Y}
+			cntR = getToPath(cgrid[0:], &p, cnt, append(points, p))
+		}
+		if o.Y < N-1 {
+			p := Point{X: o.X, Y: o.Y + 1}
+			cntD = getToPath(cgrid[0:], &p, cnt, append(points, p))
+		}
+
+		if cntR > cntD {
+			cnt = cntR
+		} else {
+			cnt = cntD
+		}
+	}
+	return cnt
+}
+
+func getHomePath(grid [][]int, o *Point, cnt int, points []Point) int {
+	cgrid := [N][]int{{}, {}, {}}
+	for i, line := range grid {
+		for _, row := range line {
+			cgrid[i] = append(cgrid[i], row)
+		}
+	}
+
+	v := cgrid[o.X][o.Y]
+	if v == -1 {
+		return 0
+	} else if v == 1 {
+		cnt += 1
+		cgrid[o.X][o.Y] = 0
+	}
+
+	if o.X == 0 && o.Y == 0 {
+		// fmt.Println(points)
+		// fmt.Println(cgrid)
+		// fmt.Println(cnt)
+	} else {
+		var cntR int
+		var cntD int
+		if o.X > 0 {
+			p := Point{X: o.X - 1, Y: o.Y}
+			cntR = getHomePath(cgrid[0:], &p, cnt, append(points, p))
+		}
+		if o.Y > 0 {
+			p := Point{X: o.X, Y: o.Y - 1}
+			cntD = getHomePath(cgrid[0:], &p, cnt, append(points, p))
+		}
+
+		if cntR > cntD {
+			cnt = cntR
+		} else {
+			cnt = cntD
+		}
+	}
+	return cnt
 }
