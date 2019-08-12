@@ -27,7 +27,7 @@ find ./ -name *.go
 grep chan ./ -r
 
 - 将当前目录下的.sql文件都加上.backup后缀
-x
+rename .sql .sql.backup ./*
 
 - Git常用命令及工作流程
 git add .
