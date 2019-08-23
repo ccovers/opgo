@@ -38,3 +38,9 @@ git merge
 git reset --hard '版本号'
 
 
+http协议，https+加密方式，websocket协议，tcp，udp，hash碰撞，ginrouter结构，redis底层，mysql索引结构，redis集群key问题，切片，map底层，队列，无锁安全队列，数据库锁，b+树
+
+
+对了，还有笔试题哦，最后一个，让你设计一个日进50g，秒100W+的日志搜集系统，手写一个队列
+
+
