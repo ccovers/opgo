@@ -4,12 +4,14 @@ import (
 	"context"
 	"fmt"
 	//"reflect"
+	"sync"
 	"time"
 )
 
 type MyCtx struct {
 	context.Context
-	NameMap map[int64]string
+	NameMap  map[int64]string
+	NameMapp sync.Map
 }
 
 func (ctx MyCtx) Value(key interface{}) interface{} {
@@ -30,9 +32,11 @@ func (ctx MyCtx) Value(key interface{}) interface{} {
 */
 func main() {
 	myCtx := MyCtx{
-		Context: context.Background(),
-		NameMap: map[int64]string{1: "一一一", 2: "二二二"},
+		Context:  context.Background(),
+		NameMap:  map[int64]string{1: "一一一", 2: "二二二"},
+		NameMapp: sync.Map{},
 	}
+	myCtx.NameMapp.Store("key", "value")
 
 	ctx, cancel := context.WithTimeout(myCtx, 3*time.Second)
 	ctx = context.WithValue(ctx, 3, "haha")
@@ -52,6 +56,9 @@ func main() {
 	fmt.Println(name)
 	name = ctx.Value(3)
 	fmt.Println(name)
+
+	v, ok := myCtx.NameMapp.Load("key")
+	fmt.Println(v, ok)
 }
 
 func watch(ctx context.Context, name string) {
