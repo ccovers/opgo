@@ -39,7 +39,7 @@ func marshal(field reflect.Value, anonymous bool) string {
 					columns = append(columns, marshal(field.Field(i), true))
 				} else {
 					columns = append(columns,
-						fmt.Sprintf(`"%s":%v`, name, marshal(field.Field(i), false)))
+						fmt.Sprintf(`%v`, marshal(field.Field(i), false)))
 				}
 			}
 		}
