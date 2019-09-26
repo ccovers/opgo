@@ -101,6 +101,7 @@ func Marshal(obj interface{}) string {
 }
 
 func main() {
+
 	obj := MyObj{
 		Name:  "小明",
 		Score: 90,
