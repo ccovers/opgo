@@ -29,23 +29,14 @@ grep chan ./ -r
 - 将当前目录下的.sql文件都加上.backup后缀
 rename .sql .sql.backup ./*
 
-- Git常用命令及工作流程
-git add .
-git commit -m '注释'
-git push
-git pull
-git merge
-git reset --hard '版本号'
+
 
 
 http协议，https+加密方式，websocket协议，tcp，udp，hash碰撞，ginrouter结构，redis底层，mysql索引结构，redis集群key问题，切片，map底层，队列，无锁安全队列，数据库锁，b+树
 
 
-对了，还有笔试题哦，最后一个，让你设计一个日进50g，秒100W+的日志搜集系统，手写一个队列
-
-快速排序算法
-堆排序算法
-归并排序
+设计一个日进50g，秒100W+的日志搜集系统，手写一个队列
+有限内存排序
 二分查找算法
 BFPRT(线性查找算法)
 DFS（深度优先搜索）
@@ -54,3 +45,7 @@ Dijkstra算法
 动态规划算法
 朴素贝叶斯分类算法
 
+商汤22K面试26岁26K
+斐波那契数列的优化
+并查集
+共识算法、一致性算法、通道数据结构、排序算法、压缩算法
