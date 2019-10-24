@@ -12,30 +12,29 @@ import (
 * 特点：平均时间复杂度O(n*logn)，最坏时间复杂度O(n*logn)，额外空间O(n)
 	（另外需要一个数组），稳定排序（用了递归就要考虑栈溢出）
 */
-var nums []int
 
 func main() {
-	nums = []int{0, 9, 2, 4, 6, 7, 1, 3, 8, 5}
+	nums := []int{0, 9, 2, 4, 6, 7, 1, 3, 8, 5}
 	fmt.Println(nums)
-	sort(0, len(nums)-1)
+	sort(nums, 0, len(nums)-1)
 	fmt.Println(nums)
 }
 
-func sort(left, right int) {
+func sort(nums []int, left, right int) {
 	tmps := make([]int, right-left+1)
-	mergeSort(left, right, tmps)
+	mergeSort(nums, left, right, tmps)
 }
 
-func mergeSort(left, right int, tmps []int) {
+func mergeSort(nums []int, left, right int, tmps []int) {
 	if left < right {
 		mid := (left + right) / 2
-		mergeSort(left, mid, tmps)
-		mergeSort(mid+1, right, tmps)
-		merge(left, mid, right, tmps)
+		mergeSort(nums, left, mid, tmps)
+		mergeSort(nums, mid+1, right, tmps)
+		merge(nums, left, mid, right, tmps)
 	}
 }
 
-func merge(left, mid, right int, tmps []int) {
+func merge(nums []int, left, mid, right int, tmps []int) {
 	index := left
 	i := left
 	j := mid + 1

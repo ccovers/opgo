@@ -27,6 +27,8 @@ func insetionSort(nums []int) []int {
 			if nums[index] < nums[j] {
 				nums[index], nums[j] = nums[j], nums[index]
 				index = j
+			} else {
+				break
 			}
 		}
 	}

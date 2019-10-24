@@ -32,14 +32,14 @@ func quick_sort(left, right int) {
 func partion(left, right int) int {
 	for left < right {
 		for ; left < right; right-- {
-			if nums[left] >= nums[right] {
+			if nums[left] > nums[right] {
 				nums[left], nums[right] = nums[right], nums[left]
 				break
 			}
 		}
 
 		for ; left < right; left++ {
-			if nums[left] >= nums[right] {
+			if nums[left] > nums[right] {
 				nums[left], nums[right] = nums[right], nums[left]
 				break
 			}
