@@ -1,6 +1,37 @@
 {
 	"comment": "",
 	"ignore": "test",
-	"package": [],
-	"rootPath": "opgo"
+	"package": [
+		{
+			"checksumSHA1": "wFLw18XvRl2NnXP3wReuyB4KXk4=",
+			"path": "github.com/pingcap/errors",
+			"revision": "95897b64e011c18f05b4daac8ff3098a6d80c57e",
+			"revisionTime": "2019-08-09T09:25:03Z"
+		},
+		{
+			"checksumSHA1": "Tutue3nEgM/87jitUcYv6ODwyNE=",
+			"path": "github.com/satori/go.uuid",
+			"revision": "b2ce2384e17bbe0c6d34077efa39dbab3e09123b",
+			"revisionTime": "2018-10-28T12:50:25Z"
+		},
+		{
+			"checksumSHA1": "0RU+/XH0aPU3jqh0BvHSG8jflAs=",
+			"path": "github.com/siddontang/go-log/log",
+			"revision": "1e957dd83bed18c84716181da7b80d4af48eaefe",
+			"revisionTime": "2019-02-21T02:24:29Z"
+		},
+		{
+			"checksumSHA1": "3CDUJ8XXVLkgXnFMnqWRj1BHxOs=",
+			"path": "github.com/siddontang/go-mysql/mysql",
+			"revision": "fba9c9655f7cff606e91f387352561ec5a77de4b",
+			"revisionTime": "2019-10-19T02:59:32Z"
+		},
+		{
+			"checksumSHA1": "hou29E6PZ7dEDFgXgM9P15cgHr4=",
+			"path": "github.com/siddontang/go/hack",
+			"revision": "bdc77568d726a8702315ec4eafda030b6abc4f43",
+			"revisionTime": "2018-06-04T09:05:27Z"
+		}
+	],
+	"rootPath": "work/opgo"
 }
