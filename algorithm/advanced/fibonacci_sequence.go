@@ -24,6 +24,7 @@ func main() {
 	fmt.Println(fib(30), cnt)
 	cnt = 0
 	fmt.Println(newFib(1, 1, 30), cnt)
+	fmt.Println(fibEx(30, 1, 1))
 }
 
 // 斐波那契数

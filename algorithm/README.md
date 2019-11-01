@@ -76,6 +76,13 @@ Cloud Native 技术栈
 Docker，Kubernetes，Prometheus 这些技术的设计思想和编程范式
 Go 语言现在唯一可以说占有绝对统治地位就是 Kubernetes 及其生态
 
+https://mp.weixin.qq.com/s/P5j8Dx3-d7rfNMZg4sQUyw
+https://mp.weixin.qq.com/s/ISIy3EO5SyZpBN86ATcqCw
+https://mp.weixin.qq.com/s/9r-oqjBuTPutxBdxBoZe6g
+https://mp.weixin.qq.com/s/fHct-RlGcjt6v7pVB5qJqg
+
+https://pjmike.github.io/2018/08/05/MySQL%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5-%E4%B8%80/
+
 
 深入理解计算机系统
 数据结构与算法分析
