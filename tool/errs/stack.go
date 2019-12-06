@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"fmt"
 	"runtime"
+	// "path/filepath"
+	// "strings"
 )
 
 func Stack(skip int) string {
@@ -33,4 +35,15 @@ func WithStack(err error) string {
 		return err.Error() + "\n" + e.Stack()
 	}
 	return err.Error()
+}
+
+func GetFileInfo() (string, int, string) {
+	fileName, line, functionName := "?", 0, "?"
+	pc, fileName, line, ok := runtime.Caller(2)
+	if ok {
+		functionName = runtime.FuncForPC(pc).Name()
+		// functionName = filepath.Ext(functionName)
+		// functionName = strings.TrimPrefix(functionName, ".")
+	}
+	return fileName, line, functionName
 }

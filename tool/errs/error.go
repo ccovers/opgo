@@ -2,16 +2,30 @@ package errs
 
 import (
 	"fmt"
+	"time"
 )
 
 type Error struct {
-	err           error // original error
-	stack         string
-	code, message string
+	err      error  `json:"err"` // original error
+	stack    string `json:"stack"`
+	code     string `json:"code"`
+	message  string `json:"message"`
+	time     string `json:"time"`
+	filename string `json:"filename"`
+	line     int    `json:"line"`
+	funcname string `json:"funcname"`
 }
 
 func New(code, message string) *Error {
-	return &Error{code: code, message: message}
+	fileName, line, functionName := GetFileInfo()
+	return &Error{
+		code:     code,
+		message:  message,
+		time:     time.Now().Format("2006-01-02 15:04:05"),
+		filename: fileName,
+		line:     line,
+		funcname: functionName,
+	}
 }
 
 func Trace(err error) *Error {
@@ -21,9 +35,14 @@ func Trace(err error) *Error {
 		}
 		return e
 	} else {
+		fileName, line, functionName := GetFileInfo()
 		return &Error{
-			err:   err,
-			stack: Stack(3),
+			err:      err,
+			stack:    Stack(3),
+			time:     time.Now().Format("2006-01-02 15:04:05"),
+			filename: fileName,
+			line:     line,
+			funcname: functionName,
 		}
 	}
 }
@@ -39,7 +58,8 @@ func (err *Error) Error() string {
 	if err.err != nil {
 		return err.err.Error()
 	} else {
-		return err.code + `: ` + err.message
+		return fmt.Sprintf(`%s:%s [%s:%d:%s]`, err.code, err.message,
+			err.filename, err.line, err.funcname)
 	}
 }
 
