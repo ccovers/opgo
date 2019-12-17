@@ -1,32 +1,44 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
-	"time"
 
-	"github.com/lovego/pinyin"
+	"./tool/json_to_struct"
 )
 
-type Info struct {
-	Id int64
+// var data string = `[{"name":"小明", "age":12, "sub":"英语","score":100},{"name":"小红", "age":12, "sub":"英语","score":100}]`
+var data string = `{"name":"小明", "age":12, "sub":"英语","score":100,"home":"china"}`
+
+type Column struct {
+	Name    string `json:"name"`
+	Age     int    `json:"age"`
+	Sub     string `json:"sub"`
+	Score   int    `json:"score"`
+	Company string `json:"company"`
 }
 
+// 打印 json 字符串的字段
 func main() {
-	fmt.Printf("aa09.;p考试\n%s\n", pinyin.Initials("aa09.;p考试"))
+	column := Column{}
+	err := json.Unmarshal([]byte(data), &column)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 
-	fmt.Println(time.Now().Format("2006-01-02 15:04"))
-	fmt.Println(time.ParseInLocation("2006-01-02 15:04", time.Now().Format("2006-01-02 15:04"), time.Local))
-
-	name := "好了\\kk%"
-	fmt.Println(strings.Replace(name, "\\", "\\\\", -1))
-	fmt.Println(strings.Replace(name, "%", "\\%", -1))
-
-	infoMap := make(map[int64]*Info)
-	info := Info{Id: 100}
-	infoMap[info.Id] = &info
-	v, ok := infoMap[100]
-	fmt.Printf("%+v, %+v\n", v, ok)
-	v, ok = infoMap[1]
-	fmt.Printf("%+v, %+v\n", v, ok)
+	fields, err := json_to_struct.Affected([]byte(data), Column{})
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Printf("%+v\n", column)
+	fmt.Printf("%s\n", strings.Join(fields, ","))
 }
+
+/*
+id: 1
+name: 小明
+age: 12
+*/

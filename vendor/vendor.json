@@ -3,6 +3,18 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "SIci45eLA5qp2UhNZ032C3zRwbo=",
+			"path": "github.com/lovego/pinyin",
+			"revision": "2161ca8e2654073e6edc8a38472edb6eabdc99e1",
+			"revisionTime": "2019-12-03T01:29:27Z"
+		},
+		{
+			"checksumSHA1": "n/3i/j3HIgT0E8AXKH6/Io2QyJQ=",
+			"path": "github.com/mozillazg/go-pinyin",
+			"revision": "a1cd0b7f540a435068caa258483e1fe418e6021a",
+			"revisionTime": "2019-04-06T14:18:55Z"
+		},
+		{
 			"checksumSHA1": "wFLw18XvRl2NnXP3wReuyB4KXk4=",
 			"path": "github.com/pingcap/errors",
 			"revision": "95897b64e011c18f05b4daac8ff3098a6d80c57e",
@@ -17,6 +29,12 @@
 		{
 			"checksumSHA1": "0RU+/XH0aPU3jqh0BvHSG8jflAs=",
 			"path": "github.com/siddontang/go-log/log",
+			"revision": "1e957dd83bed18c84716181da7b80d4af48eaefe",
+			"revisionTime": "2019-02-21T02:24:29Z"
+		},
+		{
+			"checksumSHA1": "9lEuqb2hNUEsdhjmOOcXykFbZBc=",
+			"path": "github.com/siddontang/go-log/loggers",
 			"revision": "1e957dd83bed18c84716181da7b80d4af48eaefe",
 			"revisionTime": "2019-02-21T02:24:29Z"
 		},
