@@ -1,4 +1,4 @@
-package main
+package goroutine
 
 import (
 	"fmt"
@@ -27,7 +27,7 @@ func handlePanic() func() {
 *	@ handle 回调处理方法
 * 	@ param 待处理的参数
  */
-func GoHandle(
+func Handle(
 	maxGoNum int, timeout time.Duration,
 	handle func(*HanleParam, int), param *HanleParam,
 ) error {
@@ -68,36 +68,4 @@ func GoHandle(
 		}
 	}
 	return nil
-}
-
-var num int
-
-func getNum() int {
-	num += 1
-	return num
-}
-
-func main() {
-	data := []int{1, 2, 3, 4, 5}
-
-	fmt.Println("=====")
-	err := GoHandle(2, 0*time.Second,
-		handle, &HanleParam{Data: data, Num: len(data), Mx: new(sync.Mutex)})
-	if err != nil {
-		fmt.Println("gohandle: ", err)
-	}
-	fmt.Println("=====...")
-}
-
-func handle(param *HanleParam, index int) {
-	data, ok := param.Data.([]int)
-	if !ok {
-		return
-	}
-	time.Sleep(1 * time.Second)
-
-	// 处理数据时，加锁
-	param.Mx.Lock()
-	fmt.Printf("goroutine[%d]: %d, num: %d\n", index, data[index], getNum())
-	param.Mx.Unlock()
 }
