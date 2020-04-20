@@ -1,0 +1,21 @@
+syntax = "proto3";
+option go_package = "ccovers/opgo/protocol/grpc/proto";
+package opgo.grpc;
+import "message.proto";
+
+
+service User {
+    rpc GetUserInfo (UserID) returns (GetUserResponse);
+    rpc GetUser (GetUserRequest) returns (GetUserResponse);
+}
+
+message GetUserRequest {
+    string app = 1;
+    string userId = 2;
+    string email = 3;
+    string jwtToken = 4;
+}
+
+message GetUserResponse {
+    UserInfo user = 1;
+}
