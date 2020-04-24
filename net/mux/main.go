@@ -15,6 +15,7 @@ func main() {
 	s = s.PathPrefix("/user").Subrouter()
 	s.HandleFunc("/list", UserListHandler).Methods("POST")
 	s.HandleFunc("/add", UserAddHandler).Methods("GET")
+	s.HandleFunc("/orders/{orderId}:insure", UserAddHandler).Methods("POST")
 
 	var dir string
 	flag.StringVar(&dir, "dir", ".", "the directory to serve files from. Defaults to the current dir")
