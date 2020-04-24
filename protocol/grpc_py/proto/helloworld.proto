@@ -17,3 +17,6 @@ message HelloRequest {
 message HelloReply {
     string message = 1;
 }
+
+
+// python -m grpc_tools.protoc -I=./protos --python_out=./rpc_package --grpc_python_out=./rpc_package ./proto/user_info.proto
