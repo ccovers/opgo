@@ -11,6 +11,9 @@ import (
 
 func main() {
 	r := mux.NewRouter()
+
+	r.Handle("/healthcheck", http.HandlerFunc(HealthCheck)).Methods(http.MethodGet).Name("healthcheck")
+
 	s := r.PathPrefix("/api").Subrouter()
 	s = s.PathPrefix("/user").Subrouter()
 	s.HandleFunc("/list", UserListHandler).Methods("POST")
@@ -24,6 +27,7 @@ func main() {
 	// This will serve files under http://localhost:8000/static/<filename>
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir(dir))))
 
+	r.PathPrefix("/").HandlerFunc(DefaultCatchAllHandlerFunc).Name("default")
 	err := r.Walk(func(route *mux.Route, router *mux.Router, ancestors []*mux.Route) error {
 		pathTemplate, _ := route.GetPathTemplate()
 		methods, _ := route.GetMethods()
@@ -45,4 +49,11 @@ func UserListHandler(w http.ResponseWriter, r *http.Request) {
 
 func UserAddHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("user add"))
+}
+
+func DefaultCatchAllHandlerFunc(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("default"))
+}
+func HealthCheck(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("health"))
 }

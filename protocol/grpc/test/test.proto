@@ -1,6 +1,6 @@
   syntax = "proto3";
   // 定义包名
-  option go_package = "./";
+  option go_package = "../test";
   package test;
 
   // 可以定义多个服务，每个服务内可以定义多个接口
