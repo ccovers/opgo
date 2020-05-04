@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = ".;proto";
+package proto;
+
+message User{
+	// 类型：int32、int64、sint32、sint64、string、32-bit ....
+	// 字段编号：0 ~ 536870911（除去 19000 到 19999 之间的数字）
+	// 字段规则 类型 名称 = 字段编号;
+    int64  id=1;
+    string name=2;
+    Pos pos=3;
+    int32 book=4;
+    repeated int32 pens=5;
+}
+
+message Pos {
+	string left=1;
+	string right=2;
+}
+
+// protoc -I=. --go_out=. ./*.proto # 编译 user 路径下所有 proto 文件

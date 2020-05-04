@@ -1,7 +1,0 @@
-package proto;
-message myMessage
-{
-    required int32  id=1;   // ID
-    required string str=2;  // str
-    required int32  opt=3;  // optional field
-}
