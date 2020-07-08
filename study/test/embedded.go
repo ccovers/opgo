@@ -52,5 +52,4 @@ func main() {
 		},
 	}
 	fmt.Printf("%d, %d\n", obj.MyStruct.Id, obj.Id)
-
 }

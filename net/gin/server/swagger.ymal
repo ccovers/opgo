@@ -1,0 +1,42 @@
+{
+  "swagger": "2.0",
+  "paths": {
+    "/users": {
+      "post": {
+        "description": "This will update user info",
+        "tags": [
+          "users"
+        ],
+        "summary": "Update User",
+        "operationId": "UpdateUserResponseWrapper",
+        "parameters": [
+          {
+            "x-go-name": "Id",
+            "name": "id",
+            "in": "body",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "type": "string",
+            "x-go-name": "Name",
+            "name": "name",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/UpdateUserResponseWrapper"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "UpdateUserResponseWrapper": {
+      "description": "Update User Info"
+    }
+  }
+}

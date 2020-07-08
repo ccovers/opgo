@@ -12,6 +12,7 @@ import (
 	"syscall"
 	"time"
 
+	_ "github.com/ccovers/opgo/net/gin/server/service"
 	"github.com/gin-gonic/gin"
 )
 

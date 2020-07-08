@@ -1,0 +1,26 @@
+paths:
+  /users:
+    post:
+      description: This will update user info
+      operationId: UpdateUserResponseWrapper
+      parameters:
+      - in: body
+        name: id
+        schema:
+          format: int64
+          type: integer
+        x-go-name: Id
+      - in: query
+        name: name
+        type: string
+        x-go-name: Name
+      responses:
+        "200":
+          $ref: '#/responses/UpdateUserResponseWrapper'
+      summary: Update User
+      tags:
+      - users
+responses:
+  UpdateUserResponseWrapper:
+    description: Update User Info
+swagger: "2.0"
