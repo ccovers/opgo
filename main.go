@@ -14,7 +14,7 @@ func maxProfit(prices []int) int {
 	}
 
 	dp := make([][]int, len(prices))
-	for i, _ := range dp {
+	for i := range dp {
 		dp[i] = make([]int, 3)
 	}
 	dp[0][0] = 0          // 不持股
@@ -31,7 +31,6 @@ func maxProfit(prices []int) int {
 func max(a, b int) int {
 	if a > b {
 		return a
-	} else {
-		return b
 	}
+	return b
 }
