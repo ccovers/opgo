@@ -1,0 +1,29 @@
+syntax = "proto3";
+option go_package = "../pbProto";
+package user;
+
+enum enCmdID
+{
+  SC_NONE     = 0;
+  CS_UserInfo = 1;
+  SC_UserInfo =2;
+
+}
+
+service Waiter {
+  rpc DoMD5 (CS_UserInfo_Req) returns (SC_UserInfo_Resp) {}
+}
+
+message CS_UserInfo_Req {
+  int32 Id = 1;
+}
+
+message SC_UserInfo_Resp {
+  int32 Id = 1;
+  string Name = 2;
+  int32 Score = 3;
+}
+
+// protoc --go_out=plugins=grpc:{输出目录}  {proto文件}
+// protoc.exe --go_out=plugins=grpc:pbProto/ proto/user.proto
+// https://www.jianshu.com/p/20ed82218163

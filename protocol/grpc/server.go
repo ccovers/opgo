@@ -9,7 +9,7 @@ import (
 	"runtime/debug"
 	"time"
 
-	"github.com/ccovers/opgo/protocol/grpc/test"
+	"github.com/ccovers/opgo/protocol/grpc/pbProto"
 	"github.com/golang/glog"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -18,21 +18,30 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func toJson(obj interface{}) string {
-	breq, err := json.Marshal(obj)
-	if err != nil {
-		return fmt.Sprintf("json err = %v", err)
-	} else {
-		return string(breq)
-	}
-}
+var GFuncMap map[pbProto.EnCmdID]interface{}
 
-func LogReq(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
-	sreq := toJson(req)
+func GrpcFunc(
+	ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler,
+) (resp interface{}, err error) {
+	toJson := func(obj interface{}) string {
+		breq, err := json.Marshal(obj)
+		if err != nil {
+			return fmt.Sprintf("json err = %v", err)
+		} else {
+			return string(breq)
+		}
+	}
+
 	defer func(startT time.Time) {
+		if r := recover(); r != nil {
+			err = status.Errorf(codes.Internal, "panic, recovered:%s, stack:%s", r, debug.Stack())
+			return
+		}
+
 		duration := time.Now().Sub(startT) / time.Millisecond
-		sresp := toJson(resp)
-		glog.Infof("%s, %dms, req=%s, resp err=%v, sresp=%s", info.FullMethod, duration, sreq, err, sresp)
+		glog.Infof("%s, %dms, req=%s, err=%v, resp=%s",
+			info.FullMethod, duration,
+			toJson(req), err, toJson(resp))
 		if err != nil && status.Code(err) == codes.Internal {
 			glog.Infof("stack trace: %s", string(debug.Stack()))
 		}
@@ -40,41 +49,31 @@ func LogReq(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, ha
 	return handler(ctx, req)
 }
 
-/*
-func RecoverReq(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (_ interface{}, err error) {
-	defer func() {
-		if r := recover(); r != nil {
-			err = status.Errorf(codes.Internal, "panic, req id: %s, recovered:%s, stack:%s", rpc_ctx.ReqId(ctx), r, debug.Stack())
-		}
-	}()
-
-	return handler(ctx, req)
-}*/
-
 // 业务实现方法的容器
 type server struct{}
 
-// 为server定义 DoMD5 方法 内部处理请求并返回结果
-// 参数 (context.Context[固定], *test.Req[相应接口定义的请求参数])
-// 返回 (*test.Res[相应接口定义的返回参数，必须用指针], error)
-func (s *server) DoMD5(ctx context.Context, in *test.Req) (*test.Res, error) {
+func (s *server) DoMD5(
+	ctx context.Context, in *pbProto.CS_UserInfo_Req) (*pbProto.SC_UserInfo_Resp, error,
+) {
 	glog.Infof("MD5方法请求: %d", in.Id)
-	return &test.Res{Name: "MD5 :" + fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%d", in.Id))))}, nil
+	return &pbProto.SC_UserInfo_Resp{Name: "MD5 :" +
+		fmt.Sprintf("%x", md5.Sum([]byte(fmt.Sprintf("%d", in.Id))))}, nil
 }
 
 func main() {
 	lis, err := net.Listen("tcp", ":8080") //监听所有网卡8028端口的TCP连接
 	if err != nil {
 		log.Fatalf("监听失败: %v", err)
+		return
 	}
-	s := grpc.NewServer(grpc.UnaryInterceptor(LogReq)) //创建gRPC服务
+	s := grpc.NewServer(grpc.UnaryInterceptor(GrpcFunc)) //创建gRPC服务
 
 	/**注册接口服务
 	 * 以定义proto时的service为单位注册，服务中可以有多个方法
 	 * (proto编译时会为每个service生成Register***Server方法)
 	 * 包.注册服务方法(gRpc服务实例，包含接口方法的结构体[指针])
 	 */
-	test.RegisterWaiterServer(s, &server{})
+	pbProto.RegisterWaiterServer(s, &server{})
 
 	/**如果有可以注册多个接口服务,结构体要实现对应的接口方法
 	 * user.RegisterLoginServer(s, &server{})

@@ -4,7 +4,7 @@ import (
 	"log"
 	//"os"
 
-	"github.com/ccovers/opgo/protocol/grpc/test"
+	"github.com/ccovers/opgo/protocol/grpc/pbProto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
@@ -19,7 +19,7 @@ func main() {
 	defer conn.Close()
 
 	// 创建Waiter服务的客户端
-	t := test.NewWaiterClient(conn)
+	client := pbProto.NewWaiterClient(conn)
 
 	/*// 模拟请求数据
 	res := "test123"
@@ -29,9 +29,10 @@ func main() {
 	}*/
 
 	// 调用gRPC接口
-	tr, err := t.DoMD5(context.Background(), &test.Req{Id: 10})
+	resp, err := client.DoMD5(context.Background(), &pbProto.CS_UserInfo_Req{Id: 10})
 	if err != nil {
-		log.Fatalf("could not greet: %v", err)
+		log.Fatalf("get user info err: %v", err)
+		return
 	}
-	log.Printf("服务端响应: %s", tr.Name)
+	log.Printf("服务端响应: %+v\n", *resp)
 }
