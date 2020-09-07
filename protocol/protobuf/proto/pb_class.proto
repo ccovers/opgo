@@ -1,0 +1,21 @@
+syntax = "proto3";
+option go_package = "common/pbProto/pb_class";
+package pb_class;
+
+enum enClassLevel
+{
+  ClassLevelNone   = 0;
+  ClassLevelOne    = 1;
+  ClassLevelTwo    = 2;
+  ClassLevelThree  = 3;
+  ClassLevelFour   = 4;
+  ClassLevelFive   = 5;
+  ClassLevelSix    = 6;
+
+}
+
+message Class{
+    int64   Id=1;
+    enClassLevel ClassLevel =2;
+    int32   ClassSeq =3;
+}

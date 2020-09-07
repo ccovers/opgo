@@ -1,0 +1,41 @@
+syntax = "proto3";
+option go_package = "common/pbProto/pb_user";
+//import "pb_class.proto";
+package pb_user;
+
+enum enCmdID
+{
+  SC_NONE     = 0;
+  CS_UserInfo = 1;
+  SC_UserInfo =2;
+}
+
+message User{
+	// 类型：int32、int64、sint32、sint64、string、32-bit ....
+	// 字段编号：0 ~ 536870911（除去 19000 到 19999 之间的数字）
+	// 字段规则 类型 名称 = 字段编号;
+    int64  Id = 1;
+    string Name = 2;
+    Pos Pos = 3;
+    repeated int32 Pens = 4;
+    //pb_class.enClassLevel ClassLevel = 5;
+}
+
+message Pos {
+	string Left=1;
+	string Right=2;
+}
+
+message CS_UserInfo_Req {
+  int32 Id = 1;
+}
+
+message SC_UserInfo_Resp {
+  int32 Id = 1;
+  string Name = 2;
+  int32 Score = 3;
+}
+
+// protoc.exe --go_out=.. *.proto
+
+

@@ -3,25 +3,21 @@ package main
 import (
 	"log"
 
-	pb "ccovers/opgo/protocol/protobuf/proto"
+	//"ccovers/opgo/protocol/protobuf/pbProto/user"
 	"github.com/golang/protobuf/proto"
+
+	_ "github.com/ccovers/opgo/protocol/protobuf/common/pbProto/pb_class"
+	"github.com/ccovers/opgo/protocol/protobuf/common/pbProto/pb_user"
 )
 
-type Test struct {
-	Label string
-	Type  int
-	Reps  []int64
-}
-
 func main() {
-	user := pb.User{
-		Id:   2,
+	user := pb_user.User{
+		Id:   1,
 		Name: "xiaoming",
-		Pos: &pb.Pos{
+		Pos: &pb_user.Pos{
 			Left:  "xiaohong",
 			Right: "xiaojun",
 		},
-		Book: 3,
 		Pens: []int32{1, 2, 3},
 	}
 
@@ -30,7 +26,7 @@ func main() {
 		log.Fatal("marshaling error: ", err)
 	}
 
-	bak := pb.User{}
+	bak := pb_user.User{}
 	err = proto.Unmarshal(data, &bak)
 	if err != nil {
 		log.Fatal("unmarshaling error: ", err)

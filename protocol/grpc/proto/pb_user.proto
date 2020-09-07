@@ -1,0 +1,45 @@
+syntax = "proto3";
+option go_package = "common/pbProto/pb_user";
+package pb_user;
+
+enum enCmdID
+{
+  Cmd_NONE     = 0;
+  CS_UserInfo  = 1;
+  SC_UserInfo  = 2;
+}
+
+enum EUserRet
+{
+  Invalid  = 0;
+  Success  = 1;
+  Failed   = 2;
+}
+
+service Server {
+  rpc DoReq (Cmd_Req) returns (Cmd_Resp) {}
+}
+
+message Cmd_Req {
+  enCmdID Cmd = 1;
+  bytes data = 2; 
+}
+
+message Cmd_Resp {
+  EUserRet Ret = 1;
+  bytes data = 2; 
+}
+
+message CS_UserInfo_Req {
+  int32 Id = 1;
+}
+
+message SC_UserInfo_Resp {
+  int32 Id = 1;
+  string Name = 2;
+  int32 Score = 3;
+}
+
+// protoc --go_out=plugins=grpc:{输出目录}  {proto文件}
+// protoc.exe --go_out=plugins=grpc:.. *.proto
+// https://www.jianshu.com/p/20ed82218163

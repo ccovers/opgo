@@ -1,10 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	//"os"
 
-	"github.com/ccovers/opgo/protocol/grpc/pbProto"
+	"github.com/ccovers/opgo/protocol/grpc/common/pbProto/pb_user"
+	"github.com/golang/protobuf/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
@@ -19,7 +21,7 @@ func main() {
 	defer conn.Close()
 
 	// 创建Waiter服务的客户端
-	client := pbProto.NewWaiterClient(conn)
+	client := pb_user.NewServerClient(conn)
 
 	/*// 模拟请求数据
 	res := "test123"
@@ -28,11 +30,32 @@ func main() {
 		res = os.Args[1]
 	}*/
 
-	// 调用gRPC接口
-	resp, err := client.DoMD5(context.Background(), &pbProto.CS_UserInfo_Req{Id: 10})
+	userReq := pb_user.CS_UserInfo_Req{Id: 1}
+	data, err := proto.Marshal(&userReq)
 	if err != nil {
-		log.Fatalf("get user info err: %v", err)
+		log.Fatalf("mashal err: %+v", err)
 		return
 	}
-	log.Printf("服务端响应: %+v\n", *resp)
+	// 调用gRPC接口
+
+	resp, err := client.DoReq(context.Background(), &pb_user.Cmd_Req{
+		Cmd:  pb_user.EnCmdID_CS_UserInfo,
+		Data: data,
+	})
+	if err != nil {
+		log.Fatalf("get user info err: %+v", err)
+		return
+	}
+	if resp.Ret != pb_user.EUserRet_Success {
+		log.Fatalf("get user info failed: %+v", pb_user.EUserRet_name[int32(resp.Ret)])
+		return
+	}
+
+	userResp := pb_user.SC_UserInfo_Resp{}
+	err = proto.Unmarshal(resp.Data, &userResp)
+	if err != nil {
+		log.Fatalf("unmashal err: %+v", err)
+		return
+	}
+	fmt.Printf("服务端响应: %+v\n", userResp)
 }
