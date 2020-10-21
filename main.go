@@ -51,9 +51,7 @@ func display(path string, v reflect.Value) {
         }
     case reflect.Struct:
         for i := 0; i < v.NumField(); i++ {
-            if v.Type().Field(i).Name[0] >= 97 && v.Type().Field(i).Name[0] <= 122 {
-                display(fmt.Sprintf("%s.%s", path, v.Type().Field(i).Name), v.Field(i))
-            }
+            display(fmt.Sprintf("%s.%s", path, v.Type().Field(i).Name), v.Field(i))
         }
     case reflect.Map:
         for _, key := range v.MapKeys() {
