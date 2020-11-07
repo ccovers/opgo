@@ -3,7 +3,7 @@ package main
 import (
 	"bou.ke/monkey"
 	"fmt"
-	"work/opgo/example/xpp"
+	"github.com/ccovers/opgo/example/xpp"
 )
 
 /*
