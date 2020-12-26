@@ -1,8 +1,8 @@
 package main
 
 import (
-	"bou.ke/monkey"
 	"fmt"
+	"github.com/bouk/monkey"
 	"github.com/ccovers/opgo/example/xpp"
 )
 
