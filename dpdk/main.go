@@ -1,11 +1,37 @@
 package main
 
 /*
-#cgo CFLAGS: -I./
+DPDK_LIB_DIR=$(RTE_SDK)/${RTE_TARGET}/lib
+#网卡驱动
+LDFLAGS += -lrt -pthread -ldl -Wl,--whole-archive \
+		  $(DPDK_LIB_DIR)/librte_pmd_vmxnet3_uio.a \
+		  $(DPDK_LIB_DIR)/librte_pmd_e1000.a \
+		  $(DPDK_LIB_DIR)/librte_pmd_ixgbe.a \
+		  $(DPDK_LIB_DIR)/librte_pmd_af_packet.a \
+		  $(DPDK_LIB_DIR)/librte_pmd_bond.a \
+		  $(DPDK_LIB_DIR)/librte_pmd_fm10k.a \
+		  $(DPDK_LIB_DIR)/librte_pmd_enic.a \
+		  $(DPDK_LIB_DIR)/librte_pmd_i40e.a \
+		  $(DPDK_LIB_DIR)/librte_pmd_null.a \
+		  -Wl,--no-whole-archive
+#dpdk库
+LDFLAGS += -Wl,--whole-archive \
+		  $(DPDK_LIB_DIR)/librte_mbuf.a \
+		  $(DPDK_LIB_DIR)/librte_eal.a \
+		  $(DPDK_LIB_DIR)/librte_mempool.a \
+		  $(DPDK_LIB_DIR)/librte_ring.a \
+		  $(DPDK_LIB_DIR)/librte_ethdev.a \
+		  $(DPDK_LIB_DIR)/librte_kvargs.a \
+		  $(DPDK_LIB_DIR)/librte_hash.a \
+		  $(DPDK_LIB_DIR)/librte_cmdline.a \
+		  -Wl,--no-whole-archive
+#cgo LDFLAGS += -L/root/work/pcap/dpdk_pcap/lib -ldpdk_pcap
+#cgo CXFLAGS = -std=c++11 -Wall -g -O0 -I/root/work/pcap/dpdk_pcap/include
+
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include "dpdk_demo.c"
+#include "dpdk_demo.h"
 
 extern void pcapcallback(uint32_t cap_len, uint32_t pkt_len, uint8_t *packet, struct PortCard *port_card);
 */
