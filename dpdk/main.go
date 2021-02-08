@@ -1,28 +1,7 @@
 package main
 
 /*
-#cgo LDFLAGS += -lrt -pthread -ldl -Wl,--whole-archive \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_vmxnet3_uio.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_e1000.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_ixgbe.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_af_packet.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_bond.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_fm10k.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_enic.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_i40e.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_null.a \
-		  -Wl,--no-whole-archive
-#cgo LDFLAGS += -Wl,--whole-archive \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_mbuf.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_eal.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_mempool.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_ring.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_ethdev.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_kvargs.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_hash.a \
-		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_cmdline.a \
-		  -Wl,--no-whole-archive
-#cgo LDFLAGS += -L/root/work/pcap/dpdk_pcap/lib -ldpdk_pcap
+#cgo LDFLAGS = -lrt -pthread -ldl -Wl,--whole-archive $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_vmxnet3_uio.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_e1000.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_ixgbe.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_af_packet.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_bond.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_fm10k.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_enic.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_i40e.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_null.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_mbuf.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_eal.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_mempool.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_ring.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_ethdev.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_kvargs.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_hash.a $(RTE_SDK)/${RTE_TARGET}/lib/librte_cmdline.a -L/root/work/pcap/dpdk_pcap/lib -ldpdk_pcap
 #cgo CXFLAGS = -std=c++11 -Wall -g -O0 -I/root/work/pcap/dpdk_pcap/include
 
 #include <stdio.h>
