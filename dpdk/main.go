@@ -1,29 +1,26 @@
 package main
 
 /*
-DPDK_LIB_DIR=$(RTE_SDK)/${RTE_TARGET}/lib
-#网卡驱动
-LDFLAGS += -lrt -pthread -ldl -Wl,--whole-archive \
-		  $(DPDK_LIB_DIR)/librte_pmd_vmxnet3_uio.a \
-		  $(DPDK_LIB_DIR)/librte_pmd_e1000.a \
-		  $(DPDK_LIB_DIR)/librte_pmd_ixgbe.a \
-		  $(DPDK_LIB_DIR)/librte_pmd_af_packet.a \
-		  $(DPDK_LIB_DIR)/librte_pmd_bond.a \
-		  $(DPDK_LIB_DIR)/librte_pmd_fm10k.a \
-		  $(DPDK_LIB_DIR)/librte_pmd_enic.a \
-		  $(DPDK_LIB_DIR)/librte_pmd_i40e.a \
-		  $(DPDK_LIB_DIR)/librte_pmd_null.a \
+#cgo LDFLAGS += -lrt -pthread -ldl -Wl,--whole-archive \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_vmxnet3_uio.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_e1000.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_ixgbe.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_af_packet.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_bond.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_fm10k.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_enic.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_i40e.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_pmd_null.a \
 		  -Wl,--no-whole-archive
-#dpdk库
-LDFLAGS += -Wl,--whole-archive \
-		  $(DPDK_LIB_DIR)/librte_mbuf.a \
-		  $(DPDK_LIB_DIR)/librte_eal.a \
-		  $(DPDK_LIB_DIR)/librte_mempool.a \
-		  $(DPDK_LIB_DIR)/librte_ring.a \
-		  $(DPDK_LIB_DIR)/librte_ethdev.a \
-		  $(DPDK_LIB_DIR)/librte_kvargs.a \
-		  $(DPDK_LIB_DIR)/librte_hash.a \
-		  $(DPDK_LIB_DIR)/librte_cmdline.a \
+#cgo LDFLAGS += -Wl,--whole-archive \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_mbuf.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_eal.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_mempool.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_ring.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_ethdev.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_kvargs.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_hash.a \
+		  $(RTE_SDK)/${RTE_TARGET}/lib/librte_cmdline.a \
 		  -Wl,--no-whole-archive
 #cgo LDFLAGS += -L/root/work/pcap/dpdk_pcap/lib -ldpdk_pcap
 #cgo CXFLAGS = -std=c++11 -Wall -g -O0 -I/root/work/pcap/dpdk_pcap/include
