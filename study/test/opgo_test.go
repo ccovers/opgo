@@ -46,3 +46,10 @@ func BenchmarkOpgoTest(b *testing.B) {
 		slice = append(slice, i)
 	}
 }
+
+func BenchmarkOpgoTest1(b *testing.B) {
+	slice := make([]int, 0)
+	for i := 0; i < 1000000; i++ {
+		slice = append(slice, i)
+	}
+}
