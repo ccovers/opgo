@@ -80,3 +80,34 @@ func GoStrings(length int, argv **C.char) []string {
 	}
 	return gostrings
 }
+
+/*
+#include <stdio.h>
+
+__attribute__((constructor)) void before_main() {
+   printf("Before main\n");
+}
+__attribute__((destructor)) void after_main() {
+   printf("After main\n");
+}
+
+int Print(void* temp) {
+    printf("xxxx\n");
+}
+
+int main(int argc, char **argv) {
+    int ret;
+    int lcore_id;
+
+    ret = rte_eal_init(argc, argv);
+    if (ret < 0)
+		rte_panic("Cannot init EAL\n");
+
+    RTE_LCORE_FOREACH_SLAVE(lcore_id) {
+        rte_eal_remote_launch(Print, NULL, lcore_id);
+    }
+
+    rte_eal_mp_wait_lcore();
+   return 0;
+}
+*/
